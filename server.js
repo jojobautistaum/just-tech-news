@@ -1,7 +1,9 @@
 const express = require('express');
-const routes = require('./routes');
+const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const path = require('path');
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
 
 
 const app = express();
@@ -12,6 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // turn on routes
 app.use(routes);
+
+// Handlebars Template
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+
 
 // Middleware take all contents of a folder and serve them as static assets.
 // Useful for front-end file like images, stylesheets, JS files
