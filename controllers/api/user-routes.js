@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// get a user by id
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
@@ -53,6 +54,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//add a user
 router.post('/', (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   User.create({
