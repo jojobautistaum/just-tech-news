@@ -28,19 +28,18 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// turn on routes
-app.use(routes);
-
 // Handlebars Template
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
-
-
 // Middleware take all contents of a folder and serve them as static assets.
 // Useful for front-end file like images, stylesheets, JS files
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+// turn on routes
+// must be after other app.use app.set and app.engine
+app.use(routes);
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
