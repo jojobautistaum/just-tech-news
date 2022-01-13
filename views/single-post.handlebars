@@ -31,7 +31,7 @@
       {{user.username}} on {{created_at}}
     </div>
     <div class="text">
-      {{comment_text}}
+      {{> comments post.comments}}
     </div>
   </section>
   {{/each}}
