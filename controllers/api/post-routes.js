@@ -81,7 +81,7 @@ router.post('/', (req, res) => {
   Post.create({
     title: req.body.title,
     post_url: req.body.post_url,
-    user_id: req.body.user_id
+    user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
@@ -154,6 +154,10 @@ router.put('/upvote', (req, res) => {
         res.status(500).json(err);
       });
   }
+});
+
+router.delete('/:id', withAuth, (req, res) => {
+  // inner logic remains the same...
 });
 
 module.exports = router;
